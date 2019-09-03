@@ -1,0 +1,78 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+   
+                        
+                           
+           <div class="container">             
+
+
+        <div style="text-align: center ; padding-top: 20px;">
+
+{% if error %}
+  
+    <div class="alert alert-danger alert-dismissible" role="alert" style="margin-top:30px">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Error!</strong> {{ error.messageKey|trans(error.messageData, 'security') }}.
+</div>
+{% endif %}
+
+  {% for flashMessage in app.session.flashbag.get('noticeErreur') %}
+    <div class="alert alert-danger alert-dismissible" role="alert" style="margin-top:30px">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Error!</strong> {{flashMessage}}.
+</div>
+        {% endfor %}
+
+
+
+
+        {% for flashMessage in app.session.flashbag.get('Registration') %}
+    <div class="alert alert-success alert-dismissible" role="alert" style="margin-top:30px">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Success</strong> {{flashMessage}}.
+</div>
+        {% endfor %}
+
+          {% for flashMessage in app.session.flashbag.get('Success') %}
+    <div class="alert alert-success alert-dismissible" role="alert" style="margin-top:30px">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Success!</strong> {{flashMessage}}.
+</div>
+        {% endfor %}
+
+
+
+</div>
+
+
+          
+
+
+
+
+
+
+
+
+                 <div class="login-page">
+  <div class="form">
+    
+    <form class="login-form" action="{{ path("fos_user_security_check") }}" method="post">
+
+    {% if csrf_token %}
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    {% endif %}
+
+      <input type="text"  name="_username" value="{{ last_username }}" required="required"  placeholder=" Email" />
+      <input type="password" name="_password" required="required" placeholder="Password"   />
+      <button type="submit"><span>Login</span><i id="spin-login"></i></button>
+      <p class="message">Not registered? <a href="{{path('fos_user_registration_register')}}">Create an account</a></p>
+      <p class="message"><a href="{{path('frontpage')}}">Acceuille</a></p>
+    </form>
+  </div>
+</div>
+
+
+                            
+</div>
+                  

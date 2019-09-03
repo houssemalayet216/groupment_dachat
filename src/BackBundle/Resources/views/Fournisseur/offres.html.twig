@@ -1,0 +1,841 @@
+{% extends '@Back/default/templatefournisseur.html.twig' %}
+{% block section_haider %}
+<section class="content-header">
+        <h1>
+        Gérer les offres
+       
+      </h1>
+      <ol class="breadcrumb">
+<li class="active"><a href="#"><i class="fa fa-suitcase"></i>Gérer les offres</a></li>
+       </ol>
+    </section>
+{%endblock%}
+
+ {%block content%} 
+ 
+
+ 
+
+
+
+
+
+
+
+  <div class="row">
+<div class="col-md-12">
+
+
+
+<div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Gérer les offres</h3><br/>
+            
+<div class="pull pull-right">
+
+    {{ render(controller(
+        'BackBundle:Offre:addoffre'
+       
+    )) }}
+
+
+</div>
+
+
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="tableoffre" class="table table-bordered table-striped" >
+                <thead>
+                <tr>
+                  
+                  <th class="text-center">Categorie</th>
+                  <th class="text-center">Produit</th>
+                  
+                 <th class="text-center">Qté(kg)</th>
+                  <th class="text-center">Prix (DT)</th>
+                  <th class="text-center">Tiket(kg)</th>
+                  <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>         
+
+
+
+
+
+
+
+
+
+<div class="modal fade" tabindex="-1" id="Modaloffredelete" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Supprimer offre</h4>
+      </div>
+      <div class="modal-body">
+        <p>Êtes-vous sûr de supprimer cet offre ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="delete-o"><span>Delete offre</span><i id="spin-delete-offre"></i></button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+ {%endblock%}
+
+
+
+  {%block aside %}
+  {% endblock %}
+
+
+   {% block javascript %}
+   var offre;
+
+    $(document).ready(function($){
+
+
+
+    {% for flashMessage in app.session.flashbag.get('ModificationSuccess') %}
+
+
+                           toastr.success('{{flashMessage}}','Success',{
+                                      
+                                     "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                          "hideMethod": "fadeOut"
+                              
+
+
+                                        });
+
+  
+
+  
+   
+
+        {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+ offre=$("#tableoffre").DataTable({
+     columnDefs: [
+    {
+        targets: -1,
+        className: 'dt-body-left'
+    }
+  ],
+  'destroy':true,
+   
+    'ajax':'{{path('all_offre')}}',
+     'order': []
+});
+
+
+});
+
+
+
+ $('#categorie-select').on('change', function () {
+             
+                                 var categorie=$("#categorie-select option:selected").val();
+                                 
+                                 if(categorie !==null)
+                                 {
+                                 $.ajax({
+
+                         url:'/afficher-produit',
+                       type:'POST',
+                       data:{'categorie':categorie},
+                       success:function (data,status,object)
+                       {
+                       if(data.success==true)
+                       {
+                            $('#produit-offre').html('');  
+
+                          
+                          $('#produit-offre').append(data.output);
+                        
+
+                       }
+
+                      },error:function()
+                      {
+                         
+                      }
+
+                        });
+
+                             }
+
+                                 });
+
+
+
+
+
+
+
+
+
+
+
+
+ $('#btn-add-offre').click(function(e){
+                  e.preventDefault();
+                    $('#btn-add-offre').prop('disabled',true);
+                  $("#spin-add-offre").addClass('fa fa-spinner fa-spin fa-register');
+
+
+                    var titre=$('#titre-offre').val();
+                 
+                  var categorie=$('#categorie-select').val();
+                  var produit=$('#produit-offre').val();
+                  var quantite=$('#quantite-offre').val();
+                  var prix=$('#prix-offre').val();
+                  var tiket=$('#tiket-offre').val();
+                  
+                
+                    
+                  
+                var errorOffreArray=["data.titre","data.categorie","data.produit","data.quantite","data.prix","data.tiket","children[quantite]","children[prix]","children[tiket]"];
+
+                     
+                    var formoffre = document.getElementById("add-offre-form");
+
+
+
+
+
+                    
+                    if(titre=="")
+                  {
+                       document.getElementById('data.titre').textContent='Ce champ ne doit pas etre vide ';
+                     $("#spin-add-offre").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-offre').prop('disabled',false); 
+                  }
+                  
+
+                    if(categorie=="")
+                  {
+                       document.getElementById('data.categorie').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-offre").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-offre').prop('disabled',false); 
+                  }
+
+
+                  
+
+
+                 
+                  
+
+                    if(produit=="")
+                  {
+                       document.getElementById('data.produit').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-offre").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-offre').prop('disabled',false); 
+                  }
+
+
+                  if(prix=="")
+                  {
+                       document.getElementById('data.prix').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-offre").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-offre').prop('disabled',false); 
+                  }
+                  
+
+                   if(quantite=="")
+                  {
+                       document.getElementById('data.quantite').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-offre").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-offre').prop('disabled',false); 
+                  }
+
+
+                   if(tiket=="")
+                  {
+                       document.getElementById('data.tiket').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-offre").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-offre').prop('disabled',false); 
+                  }
+                  
+                
+
+
+
+
+
+
+
+
+                        $('#titre-offre').change(function(){
+                  
+                 if($.trim(document.getElementById('data.titre').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.titre').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#categorie-select').change(function(){
+                  
+                 if($.trim(document.getElementById('data.categorie').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.description').textContent="";
+                                  }
+                    
+                                 });
+
+
+                    
+           
+
+
+
+                     
+
+
+                                 $('#produit-offre').change(function(){
+                  
+                 if($.trim(document.getElementById('data.zone').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.produit').textContent="";
+                                  }
+                    
+                                 });
+
+                      
+
+          
+
+
+
+                        $('#prix-offre').change(function(){
+                  
+                 if($.trim(document.getElementById('data.option').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.prix').textContent="";
+                                  }
+                    
+                                 });
+
+
+                   
+                             $('#quantite-offre').change(function(){
+                  
+                 if($.trim(document.getElementById('data.option').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.quantite').textContent="";
+                                  }
+                    
+                                 });
+
+                  
+
+                         $('#tiket-offre').change(function(){
+                  
+                 if($.trim(document.getElementById('data.option').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.tiket').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+
+
+                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 if(titre!=="" &&categorie!=="" &&produit!==""&&prix!==""&&quantite!==""&&tiket!=="")
+               {
+               
+
+                      $.ajax({
+                       dataType:"json",
+                       url:$("#add-offre-form").attr('action'),
+                       type:$("#add-offre-form").attr('method'),
+                        data:new FormData(formoffre),
+                       contentType:false,
+                       processData:false,
+                       cache:false,
+                       success:function (data,status,object)
+                       {
+
+                       
+                       var message=data.message;
+                       if(data.success==true)
+                          {
+
+
+                         
+                               errorOffreArray.forEach(function(error){
+                                  if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+                               });
+                             
+                               
+                            $('#myModal').modal('hide');
+                                offre.ajax.reload(null,true);
+                              $('#add-offre-form')[0].reset();
+                            
+
+                            toastr.success(message,'Success', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                                 $("#spin-add-offre").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-offre').prop('disabled',false); 
+                            
+
+                          }
+
+                          else{
+
+                             toastr.error(message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                                      $("#spin-add-offre").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-offre').prop('disabled',false); 
+
+
+                            if(data.errors)
+                            {
+
+                               $("#spin-add-offre").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-offre').prop('disabled',false); 
+                             
+                             console.log(data.errors);
+
+                              data.errors.forEach(function(error)
+                              {
+
+                               document.getElementById(error.elementId).textContent=error.errorMessage;
+                              });
+
+
+                              $("#spin-add-offre").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-offre').prop('disabled',false); 
+
+                            }
+
+                          }
+                                
+
+                        
+                        
+                          
+                          
+                          },
+                          error:function (data,status,object)
+                          {
+                             
+
+                           toastr.error(data.message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+
+
+
+                         $("#spin-add-offre").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-offre').prop('disabled',false); 
+                          }
+
+
+
+
+
+
+
+
+                       });
+
+
+
+
+
+
+
+
+
+
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$('#close-modale-add').on("click",function(){
+  $('#add-offre-form')[0].reset();
+  var errorfArray=["data.titre","data.categorie","data.produit","data.quantite","data.prix","data.tiket","children[quantite]","children[prix]","children[tiket]"];
+
+  errorfArray.forEach(function(error){
+
+                               if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+
+                              });
+
+$('#divmission').html("");
+
+});
+
+
+
+
+
+$('#close-up-add-modale').on("click",function(){
+  $('#add-offre-form')[0].reset();
+ var errorfArray=["data.titre","data.categorie","data.produit","data.quantite","data.prix","data.tiket","children[quantite]","children[prix]","children[tiket]"];
+
+  errorfArray.forEach(function(error){
+
+                               if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+
+                              });
+                              $('#divmission').html("");
+});
+
+
+
+
+
+
+
+
+
+
+function deleteo(id){
+
+if(id){
+  $("#delete-o").unbind('click').bind('click',function(){
+   
+     $('#delete-o').prop('disabled',true);
+    $("#spin-delete-offre").addClass('fa fa-spinner fa-spin fa-register');
+
+       $.ajax({
+                       
+                       url:'/user/home/delete-offre/'+id,
+                       type:'POST',
+                       success:function (data,status,object)
+                       {
+
+                        var message=data.message;
+                       if(data.success==true)
+                          {
+
+                           $("#spin-delete-offre").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#delete-o').prop('disabled',false);
+
+                           $('#Modaloffredelete').modal('hide');
+                             offre.ajax.reload(null,false);
+
+                               toastr.success(message,'Success', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                             
+
+                          }else{
+                          
+                             
+                           $("#spin-delete-offre").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#delete-o').prop('disabled',false);
+                             $('#Modaloffredelete').modal('hide');
+
+                               toastr.error(message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+
+
+
+                          }
+
+              
+
+                       }
+
+
+
+                       });
+
+
+
+    });
+
+    }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   {%endblock%}

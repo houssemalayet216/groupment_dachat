@@ -1,0 +1,123 @@
+{% extends '@Back/default/templatefournisseur.html.twig' %}
+{% block section_haider %}
+<section class="content-header">
+        <h1>
+        Liste des commandes reçues
+       
+      </h1>
+      <ol class="breadcrumb">
+<li class="active"><a href="#"><i class="fa fa-suitcase"></i>Liste des commandes reçues</a></li>
+       </ol>
+    </section>
+{%endblock%}
+
+ {%block content%} 
+ 
+
+ 
+
+
+
+
+
+  <div class="row">
+<div class="col-md-12">
+
+
+
+<div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Liste des commandes reçues</h3><br/>
+            
+
+
+
+</div>
+
+
+
+           
+           
+            <div class="box-body">
+              <table id="tableCommandeFournisseur" class="table table-bordered table-striped" >
+                <thead>
+                <tr>
+                  
+                  <th class="text-center">Email</th>
+                    <th class="text-center">Pu (DT)</th>
+                 <th class="text-center">Qté de tiket(kg)</th>
+                 <th class="text-center">Nbr tiket(kg)</th>
+                  <th class="text-center">Totale(DT)</th>
+                  <th class="text-center">Date de commandation</th>
+                  <th class="text-center">Status</th>
+                  
+                  <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+ {%endblock%}
+
+
+
+  {%block aside %}
+  {% endblock %}
+
+
+   {% block javascript %}
+
+
+      var commandeFournisseur;
+
+    $(document).ready(function($){
+  
+ offre=$("#tableCommandeFournisseur").DataTable({
+     columnDefs: [
+    {
+        targets: -1,
+        className: 'dt-body-left'
+    }
+  ],
+  'destroy':true,
+   
+    'ajax':'{{path('all_commande_fournisseur')}}',
+     'order': []
+});
+
+
+});
+
+
+
+   {% endblock %}

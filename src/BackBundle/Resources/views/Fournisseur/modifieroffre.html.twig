@@ -1,0 +1,213 @@
+{% extends '@Back/default/templatefournisseur.html.twig' %}
+{% block section_haider %}
+<section class="content-header">
+        <h1>
+        Gérer les offres
+       
+      </h1>
+      <ol class="breadcrumb">
+<li class="active"><a href="#"><i class="fa fa-suitcase"></i>Gérer les offres</a></li>
+       </ol>
+    </section>
+{%endblock%}
+
+ {%block content%} 
+ 
+
+ 
+
+
+
+
+<div class="col-md-12">
+
+
+
+<div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Modifier offre</h3><br/>
+</div>              
+<div class="box-body">
+  {{ form_start(form, {'method': 'post', 'action': path('modifier_offre',{'id':id}), 'attr': {'id':'modifier-offre-form','novalidate' : 'novalidate'}}) }}
+ <div class="col-md-12 form-group">
+                  <label for="username">Titre:*</label>
+                  {{form_widget(form.titre ,{'id':'titre-offre','attr':{'class': 'form-control','placeholder':'Titre'}})}}                 
+                    <span class="text-danger" id="data.titre">{{form_errors(form.titre)}}</span>
+
+                 
+       </div>
+     
+
+
+
+  <div class="col-md-12 form-group">
+                  <label for="username">Description :</label>
+                  {{form_widget(form.description ,{'id':'description-modifier-offre','attr':{'class': 'form-control','placeholder':'Description'}})}}                 
+                    <span class="text-danger" id="data.description">{{form_errors(form.description)}}</span>
+
+                 
+       </div>
+
+
+
+
+
+
+
+
+ <div class="col-md-6 form-group">
+                  <label for="username">Quantité (en kg)  :*</label>
+                {{form_widget(form.quantite ,{'id':'quantite-modifier-offre','attr':{'class': 'form-control','placeholder':'Quantité'}})}}                  
+                    <span class="text-danger" id="data.quantite">{{form_errors(form.quantite)}}</span>
+
+                 
+       </div>
+
+
+  
+        
+
+ 
+
+
+
+       <div class="col-md-6 form-group">
+                  <label for="username">  Prix unitaire (En Dinar):*</label>
+                {{form_widget(form.prix ,{'id':'prix-modifier-offre','attr':{'class': 'form-control','placeholder':'Prix'}})}}                  
+                    <span class="text-danger" id="data.prix">{{form_errors(form.prix)}}</span>
+
+                 
+       </div>
+
+
+
+
+
+  <div class="col-md-12 form-group">
+                  <label for="username">Tiket (En kg) :*</label>
+                  {{form_widget(form.tiket ,{'id':'tiket-modifier-offre','attr':{'class': 'form-control'}})}}                 
+                    <span class="text-danger" id="data.tiket">{{form_errors(form.tiket)}}</span>
+
+                 
+       </div>
+
+
+
+
+
+
+
+
+
+
+
+ <div class="col-md-12 form-group">
+                  <label for="username">Image d&apos;offre :</label>
+                  {{form_widget(form.image ,{'id':'image-modifier-offre','attr':{'class': 'form-control','placeholder':'Image offre'}})}}                 
+                    <span class="text-danger" id="data.image">{{form_errors(form.image)}}</span>
+
+                 
+       </div> 
+
+
+<div class="col-md-12 col-md-offset-5">
+                  <button type="submit" class="btn btn-primary" id="btn-add-offre"> <span>Enregistrer</span><i id="spin-add-offre"></i></button>
+
+                 
+       </div> 
+
+
+
+{{ form_end(form) }}
+
+
+
+</div>
+</div>
+</div>
+
+
+{%endblock%}              
+
+{%block aside %}
+  {% endblock %}
+
+   {% block javascript %}
+    
+       $('#titre-offre').change(function(){
+                  
+                 if($.trim(document.getElementById('data.titre').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.titre').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#description-modifier-offre').change(function(){
+                  
+                 if($.trim(document.getElementById('data.description').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.description').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#quantite-modifier-offre').change(function(){
+                  
+                 if($.trim(document.getElementById('data.quantite').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.quantite').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#prix-modifier-offre').change(function(){
+                  
+                 if($.trim(document.getElementById('data.prix').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.prix').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#tiket-modifier-offre').change(function(){
+                  
+                 if($.trim(document.getElementById('data.tiket').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.tiket').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#image-modifier-offre').change(function(){
+                  
+                 if($.trim(document.getElementById('data.image').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.image').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+
+
+
+
+
+
+
+
+
+   {% endblock %}

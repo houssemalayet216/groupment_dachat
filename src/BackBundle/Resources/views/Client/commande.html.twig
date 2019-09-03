@@ -1,0 +1,125 @@
+{% extends '@Back/default/templateclient.html.twig' %}
+{% block section_haider %}
+<section class="content-header">
+        <h1>
+        Liste des commandes envoyées
+       
+      </h1>
+      <ol class="breadcrumb">
+<li class="active"><a href="#"><i class="fa fa-suitcase"></i>Liste des commandes envoyées</a></li>
+       </ol>
+    </section>
+{%endblock%}
+
+ {%block content%} 
+ 
+
+ 
+
+
+
+
+
+  <div class="row">
+<div class="col-md-12">
+
+
+
+<div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Liste des commandes envoyées</h3><br/>
+            
+
+
+
+</div>
+
+
+
+         
+            <div class="box-body">
+              <table id="tableCommandeClient" class="table table-bordered table-striped" >
+                <thead>
+                <tr>
+                  
+                  
+                  <th class="text-center">Produit</th>
+                    <th class="text-center">Pu (DT)</th>
+                 <th class="text-center">Qté de tiket(kg)</th>
+                 <th class="text-center">Nbr tiket(kg)</th>
+                  <th class="text-center">Totale(kg)</th>
+                  <th class="text-center">Status</th>
+                  
+                  <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+ {%endblock%}
+
+
+
+  {%block aside %}
+  {% endblock %}
+
+
+   {% block javascript %}
+
+   var commandeClient;
+
+    $(document).ready(function($){
+  
+ offre=$("#tableCommandeClient").DataTable({
+     columnDefs: [
+    {
+        targets: -1,
+        className: 'dt-body-left'
+    }
+  ],
+  'destroy':true,
+   
+    'ajax':'{{path('all_commande_client')}}',
+     'order': []
+});
+
+
+});
+
+
+
+
+
+
+
+   {% endblock %}

@@ -1,0 +1,493 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+   <script src="{{asset('frontFolder/users.js')}}"></script>
+<style>.input-buttom{margin-bottom:10px;}
+
+</style>
+<div class="container ">
+    <div class="login-signup" style="margin-top:40px;margin-left:220px;">
+      <div class="row">
+        <div class="col-md-9 nav-tab-holder" style="padding-left: 15px;
+    padding-right: 15px;" 
+    
+>
+        <ul class="nav nav-tabs row" role="tablist" style="margin-right:10px;margin-left: 0px;">
+          <li role="presentation" class="active col-md-6" style="margin:left:30px;"><a href="#home" id="navigationhome" aria-controls="home" role="tab" data-toggle="tab">Client</a></li>
+          <li role="presentation" class="col-md-6"><a href="#profile" aria-controls="profile" id="navigationprofile"  role="tab" data-toggle="tab">Fournisseur</a></li>
+        </ul>
+      </div>
+
+      </div>
+
+
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">
+          <div class="row">
+
+            <div class="col-md-9 mobile-pull">
+              <article role="login">
+                <h3 class="text-center"><i class="fa fa-lock"></i>Créer compte Client</h3>
+                {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register','novalidate':'novalidate','id':'register_client_ajax'}}) }}
+                 
+                
+                 <div class="row">
+                         <div class="col-md-12">
+                        <div class="form-group">
+                           <label for="username">Civilite :*</label>
+                           {{form_widget(form.civilite,{ 'id':'civilite-register-client','attr': {'class': 'form-control input-buttom', 'placeholder': 'Civilite' } })}}
+                                       <span class="text-danger id="civilite">{{form_errors(form.civilite)}}</span>
+                        </div>
+                        </div>
+
+                        
+
+                        </div>
+
+
+
+
+                         <div class="row">
+                         <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="username">Nom :*</label>
+                           {{form_widget(form.nom,{'id':'nom-register-client','attr': {'class': 'form-control input-buttom', 'placeholder': 'Nom' } })}}
+                                       <span class="text-danger" id="nom">{{form_errors(form.nom)}}</span>
+                        </div>
+                        </div>
+
+                        <div class="col-md-6">
+                        <div class="form-group">
+                           <label for="username">Prenom :*</label>
+                           {{form_widget(form.prenom,{'id':'prenom-register-client', 'attr': {'class': 'form-control input-buttom', 'placeholder': 'Prenom' } })}}
+                                       <span class="text-danger" id="prenom">{{form_errors(form.prenom)}}</span>
+                        </div>
+                        </div>
+
+                        </div>
+
+                        <div class="row">
+                         <div class="col-md-6">
+                        <div class="form-group">
+                           <label for="username">Ville :*</label>
+                           {{form_widget(form.ville,{'id':'ville-register-client' , 'attr': {'class': 'form-control input-buttom', 'placeholder': 'Ville' } })}}
+                                       <span class="text-danger" id="ville">{{form_errors(form.ville)}}</span>
+                        </div>
+                        </div>
+
+                        <div class="col-md-6">
+                        <div class="form-group">
+                        <label for="username">Adresse :*</label>
+                           {{form_widget(form.adresse,{'id':'adresse-register-client' ,'attr': {'class': 'form-control input-buttom', 'placeholder': 'Adresse' } })}}
+                                       <span class="text-danger" id="adresse">{{form_errors(form.adresse)}}</span>
+                        </div>
+                        </div>
+
+                        </div>
+                         
+
+                          <div class="row">
+                         <div class="col-md-6">
+                        <div class="form-group">
+                           <label for="username">Code Postale :*</label>
+                           {{form_widget(form.cp,{ 'id':'cp-register-client','attr': {'class': 'form-control input-buttom', 'placeholder': 'Code postale' } })}}
+                                       <span class="text-danger" id="cp">{{form_errors(form.cp)}}</span>
+                        </div>
+                        </div>
+
+                        <div class="col-md-6">
+                        <div class="form-group">
+                           <label for="username">Telephone :*</label>
+                           {{form_widget(form.telephone,{'id':'telephone-register-client' ,'attr': {'class': 'form-control input-buttom', 'placeholder': 'Telephone' } })}}
+                                       <span class="text-danger" id="telephone">{{form_errors(form.telephone)}}</span>
+                        </div>
+                        </div>
+
+                        </div>
+
+                         <div class="row">
+                         <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="username">Username :*</label>
+                           {{form_widget(form.username,{'id':'username-register-client' ,'attr': {'class': 'form-control input-buttom', 'placeholder': 'Username' } })}}
+                                       <span class="text-danger" id="username">{{form_errors(form.username)}}</span>
+                        </div>
+                        </div>
+
+                        <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="username">Email :*</label>
+                           {{form_widget(form.email,{'id':'email-register-client' ,'attr': {'class': 'form-control input-buttom', 'placeholder': 'Email' } })}}
+                                       <span class="text-danger" id="email">{{form_errors(form.email)}}</span>
+                        </div>
+                        </div>
+
+                        </div>
+
+
+                        
+                          <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="username">Password :*</label>
+                      {{ form_widget(form.plainPassword.first, {'id':'password-register-client', 'attr': {'class': 'form-control input-buttom', 'placeholder': 'Password' } }) }}
+    
+                             <span class="text-danger" id="plainPassword">{{form_errors(form.plainPassword.first)}}</span>
+
+
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="username">Repeter password :*</label>
+                    {{ form_widget(form.plainPassword.second, { 'id':'confirmation-register-client','attr': {'class': 'form-control input-buttom', 'placeholder': 'Confirmer password'  } }) }}
+                     <span class="text-danger" id="children[plainPassword]">{{form_errors(form.plainPassword.second)}}</span>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <div class="form-group">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> Please accept the terms and conditions to proceed with your request.
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block" id="btn_register_client_ajax" >Enregistrer <span><i id="spins_client"></i></span></button>
+                  </div>
+                {{ form_end(form) }}
+
+                <footer role="signup" class="text-center">
+                  <ul>
+                    <li>
+                       <a href="{{path('fos_user_security_login')}}" style="color:#449d44;">Login</a> <a href="{{path('frontpage')}}" style="color:#449d44;margin-left:8px;">Acceuille</a>
+                    </li>
+                   
+                  </ul>
+                </footer>
+
+              </article>
+            </div>
+
+        
+
+          </div>
+          <!-- end of row -->
+        </div>
+
+        <!-- end of home -->
+
+      <div role="tabpanel" class="tab-pane" id="profile">
+       {{ render(url('fournisseur_register')) }}
+      </div>
+  </div>
+  </div>
+
+
+  <script>
+    
+
+
+$('#navigationhome').click(function(){
+$('#profile').removeClass('show');
+
+});
+
+$('#navigationprofile').click(function(){
+$('#home').removeClass('show');
+
+});
+
+
+
+
+
+
+
+               
+                
+
+
+
+
+                    $('#civilite-register-client').change(function(){
+                  
+                 if($.trim(document.getElementById('civilite').textContent) !== "")
+
+                                  {
+                                    document.getElementById('civilite').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#nom-register-client').change(function(){
+                  
+                 if($.trim(document.getElementById('nom').textContent) !== "")
+
+                                  {
+                                    document.getElementById('nom').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#prenon-register-client').change(function(){
+                  
+                 if($.trim(document.getElementById('prenom').textContent) !== "")
+
+                                  {
+                                    document.getElementById('prenom').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#ville-register-client').change(function(){
+                  
+                 if($.trim(document.getElementById('ville').textContent) !== "")
+
+                                  {
+                                    document.getElementById('ville').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#adresse-register-client').change(function(){
+                  
+                 if($.trim(document.getElementById('adresse').textContent) !== "")
+
+                                  {
+                                    document.getElementById('adresse').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#cp-register-client').change(function(){
+                  
+                 if($.trim(document.getElementById('cp').textContent) !== "")
+
+                                  {
+                                    document.getElementById('cp').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+
+                                
+
+                                 $('#telephone-register-client').change(function(){
+                  
+                 if($.trim(document.getElementById('telephone').textContent) !== "")
+
+                                  {
+                                    document.getElementById('telephone').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#email-register-client').change(function(){
+                  
+                 if($.trim(document.getElementById('email').textContent) !== "")
+
+                                  {
+                                    document.getElementById('email').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#username-register-client').change(function(){
+                  
+                 if($.trim(document.getElementById('username').textContent) !== "")
+
+                                  {
+                                    document.getElementById('username').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#password-register-client').change(function(){
+                  
+                 if($.trim(document.getElementById('plainPassword').textContent) !== "")
+
+                                  {
+                                    document.getElementById('plainPassword').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#confirmation-register-client').change(function(){
+                  
+                 if($.trim(document.getElementById('children[plainPassword]').textContent) !== "")
+
+                                  {
+                                    document.getElementById('children[plainPassword]').textContent="";
+                                  }
+                    
+                                 });
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+                    
+                  
+
+
+
+
+
+
+
+
+
+     </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>

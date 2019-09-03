@@ -1,0 +1,46 @@
+{% extends '@Front/default/template.html.twig' %}
+    
+    {%block header%}
+    {%endblock%}
+
+    {%block slider%}
+   
+    {% endblock %}
+
+   
+      {% block pageContainer %}
+      
+
+
+
+       
+        <div>
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
+
+             <style>
+
+body {
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  background: -moz-linear-gradient(right, #76b852, #8DC26F);
+  background: -o-linear-gradient(right, #76b852, #8DC26F);
+  background: linear-gradient(to left, #76b852, #8DC26F);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}
+
+
+
+</style>
+
+            {% endblock pageContainer %}
+
+{%block footer%}
+{%endblock %}
+
+
+
+

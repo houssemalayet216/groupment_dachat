@@ -1,0 +1,669 @@
+{% extends '@Back/default/templatefournisseur.html.twig' %}
+
+{% block section_haider %}
+<section class="content-header">
+      <h1>
+        Tableau de bord
+        
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Tableau de bord</a></li>
+        <li class="active">Profile</li>
+      </ol>
+    </section>
+{%endblock%}
+
+  {%block content%} 
+
+  
+      <section>
+      <div class="row">
+      
+<div class="col-md-3">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+
+              {% if app.user.photo %}
+              <img class="profile-user-img img-responsive img-circle" src="{{asset('')}}uploads/logo/{{app.user.logo}}" alt="User profile picture">
+              
+                  {% else %}
+                  <img class="profile-user-img img-responsive img-circle" src="{{asset('uploads/telechargement.jpg')}}" alt="User profile picture">
+               
+                  {% endif %}
+
+             
+
+              <h3 class="profile-username text-center">{{app.user.Responsable}}</h3>
+
+              <p class="text-muted text-center">Fournisseur</p>
+
+            
+
+             
+            </div>
+           
+          </div>
+        
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Information Génarale</h3>
+            </div>
+        
+            <div class="box-body">
+             
+
+              <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+
+              <p class="text-muted">{{app.user.ville}},{{app.user.adresse}},{{app.user.cp}}</p>
+
+              <hr>
+
+              <strong><i class="fa fa-pencil margin-r-5"></i>Téléphone</strong>
+
+              <p class="text-muted">{{app.user.telephone}}</p>
+              
+
+              
+            </div>
+           
+          </div>
+          
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="col-md-9">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+            
+              <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
+            </ul>
+            <div class="tab-content">
+           
+
+              <div class="active tab-pane" id="settings">
+                
+                 {{ form_start(form, {'method': 'post', 'action': path('modifier_profile_fournisseur'), 'attr': {'id':'edit_fournisseur','class':'form-horizontal','novalidate':'novalidate'}}) }}
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="username">Responsable :*</label>
+                    
+                       {{form_widget(form.responsable ,{'id':'responsablefournisseur','attr':{'class': 'form-control','placeholder':'Responsable'}})}} 
+                       <span class="text-danger" id="data.responsable"></span>
+                   
+                  </div>
+
+                  </div>
+                 
+
+                 
+                 <div class="row">
+                  <div class=" col-md-12">
+                    <label for="username">Fonction :*</label>
+                    
+                       {{form_widget(form.fonction ,{'id':'fonctionfournisseur','attr':{'class': 'form-control','placeholder':'Fonction'}})}} 
+                       <span class="text-danger" id="data.fonction"></span>
+                   
+                  </div>
+
+                  
+
+                  </div>
+
+                    <div class="row">
+                  <div class=" col-md-6">
+                    <label for="username">Username :*</label>
+                    
+                       {{form_widget(form.username ,{'id':'usernamefournisseur','attr':{'class': 'form-control','placeholder':'Username'}})}} 
+                       <span class="text-danger" id="data.username"></span>
+                   
+                  </div>
+
+                  <div class=" col-md-6">
+                    <label for="username">Email :*</label>
+                    
+                       {{form_widget(form.email ,{'id':'emailfournisseur','attr':{'class': 'form-control','placeholder':'Email'}})}} 
+                    
+                        <span class="text-danger" id="data.email"></span>
+                  </div>
+
+                  </div>
+
+                  
+
+                     <div class="row">
+                  <div class=" col-md-6">
+                    <label for="username">Ville :*</label>
+                    
+                       {{form_widget(form.ville ,{'id':'villefournisseur','attr':{'class': 'form-control','placeholder':'Ville'}})}} 
+                       <span class="text-danger" id="data.ville"></span>
+                   
+                  </div>
+
+                  <div class=" col-md-6">
+                   <label for="username">Adresse :*</label>
+                    
+                       {{form_widget(form.adresse ,{'id':'adressefournisseur','attr':{'class': 'form-control','placeholder':'Adresse'}})}} 
+                       <span class="text-danger" id="data.adresse"></span>
+                   
+                  </div>
+
+                  </div>
+
+
+                    <div class="row">
+                  <div class=" col-sm-6">
+                    <label for="username">Code postale :*</label>
+                    
+                       {{form_widget(form.cp ,{'id':'cpfournisseur','attr':{'class': 'form-control','placeholder':'Code postale'}})}} 
+                       <span class="text-danger" id="data.cp"></span>
+                   
+                  </div>
+
+                  <div class=" col-sm-6">
+                    <label for="username">Téléphone :*</label>
+                    
+                       {{form_widget(form.telephone ,{'id':'telephonefournisseur','attr':{'class': 'form-control','placeholder':'Telephone'}})}} 
+                       <span class="text-danger" id="data.telephone"></span>
+                   
+                  </div>
+
+                  </div>
+
+                 
+
+                   <div class="row">
+                  <div class=" col-md-12">
+                    <label for="username">Logo :</label>                    
+                       {{form_widget(form.logo ,{'id':'logofournisseur','attr':{'class': 'form-control','placeholder':'Logo'}})}} 
+                       <span class="text-danger" id="data.logo"></span>
+                   
+                  </div>
+
+
+                  </div>
+
+
+
+
+
+                  
+                  <div class="row" >
+                    <div class="col-sm-offset-4 col-sm-8" style="margin-top:10px;">
+                      <button type="submit" class="btn btn-danger" id="btn_profilefournisseur_ajax"><span>Modifier</span><i id="spin-fournisseur"></i></button>
+                    </div>
+                  </div>
+                {{ form_end(form) }}
+
+
+
+
+
+
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {% endblock %}
+  {%block aside %}
+  {%endblock%}
+
+
+   {%block javascript%}
+
+
+
+
+                   $('#btn_profilefournisseur_ajax').click(function(e){
+                  e.preventDefault();
+
+                    $('#btn_profilefournisseur_ajax').prop('disabled',true);
+                  $("#spin-fournisseur").addClass('fa fa-spinner fa-spin fa-register');
+                   
+                     var username=$('#usernamefournisseur').val();
+                  var email=$('#emailfournisseur').val();
+                  var responsable=$('#responsablefournisseur').val();
+                  var fonction=$('#fonctionfournisseur').val();
+                  var ville=$('#villefournisseur').val();
+                  var adresse=$('#adressefournisseur').val();
+                  var cp=$('#cpfournisseur').val();
+                  
+                  var telephone=$('#telephonefournisseur').val();
+                  
+
+                  
+                   var errorFournisseurArray=['data.responsable','data.fonction','data.username','data.email','data.ville','data.adresse','data.cp','data.telephone'];
+                    var formfournisseur = document.getElementById("edit_fournisseur");
+
+                    if(email=="")
+                  {
+                       document.getElementById('data.emailCanonical').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profilefournisseur_ajax').prop('disabled',false); 
+                  }
+                  
+
+                    if(username=="")
+                  {
+                       document.getElementById('data.username').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profilefournissur_ajax').prop('disabled',false); 
+                  }
+
+
+
+                      if(responsable=="")
+                  {
+                       document.getElementById('data.responsable').textContent='Ce champ ne doit pas entre vide ';
+                      $("#spin-fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profilefournissur_ajax').prop('disabled',false);
+                  }
+                  
+
+                    if(fonction=="")
+                  {
+                       document.getElementById('data.fonction').textContent='Ce champ ne doit pas entre vide ';
+                       $("#spin-fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profilefournissur_ajax').prop('disabled',false); 
+                  }
+                    
+
+                  
+                  
+
+                    if(ville=="")
+                  {
+                       document.getElementById('data.ville').textContent='Ce champ ne doit pas entre vide ';
+                      $("#spin-fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profilefournissur_ajax').prop('disabled',false); 
+                  }
+                  
+
+                      if(adresse=="")
+                  {
+                       document.getElementById('data.adresse').textContent='Ce champ ne doit pas entre vide ';
+                       $("#spin-fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profilefournissur_ajax').prop('disabled',false);
+                  }
+                  
+
+                    if(cp=="")
+                  {
+                       document.getElementById('data.cp').textContent='Ce champ ne doit pas entre vide ';
+                      $("#spin-fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profilefournissur_ajax').prop('disabled',false); 
+                  }
+
+
+                   
+
+
+
+                        $('#emailfournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.email').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.email').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#usernamefournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.username').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.username').textContent="";
+                                  }
+                    
+                                 });
+
+  
+
+
+
+                   $('#responsablefournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.responsable').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.responsable').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#fonctionfournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.fonction').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.fonction').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+                             
+
+
+                                 $('#villefournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.ville').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.ville').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                   $('#adressefournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.adresse').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.adresse').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#cpfournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.cp').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.cp').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+                                 $('#telephonefournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.telephone').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.telephone').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+
+
+
+
+
+
+
+           if(email!==""&&username!==""&&responsable!==""&&fonction!==""&&ville!==""&&adresse!==""&&cp!==""&&telephone!=="")
+
+             {
+                      $.ajax({
+                       dataType:"json",
+                       url:$("#edit_fournisseur").attr('action'),
+                       type:$("#edit_fournisseur").attr('method'),
+                        data:new FormData(formfournisseur),
+                       contentType:false,
+                       processData:false,
+                       cache:false,
+                       success:function (data,status,object)
+                       {
+
+                      
+                       var message=data.message;
+                       if(data.success==true)
+                          {
+
+
+                         
+                               errorFournisseurArray.forEach(function(error){
+                                  if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+                               });
+                             
+
+                            
+
+                            document.location.reload(true);
+
+
+                            toastr.success(message,'Success', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "600",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+                            
+
+                          }
+
+                          else{
+
+                             toastr.error(message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "600",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+
+
+
+                            if(data.errors)
+                            {
+
+                               console.log(data.errors);
+                              errorFournisseurArray.forEach(function(error){
+
+                               if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+
+                              });
+
+                              data.errors.forEach(function(error)
+                              {
+
+                               document.getElementById(error.elementId).textContent=error.errorMessage;
+                              });
+
+                            }
+
+                          }
+                                
+
+                        
+                         $("#spin-fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profilefournisseur_ajax').prop('disabled',false); 
+                          
+
+                          },
+                          error:function (data,status,object)
+                          {
+                             console.log(data.message);
+                          }
+
+
+
+
+
+
+
+
+                       });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     }
+
+
+
+
+
+
+
+                      $("#spin-fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profilefournisseur_ajax').prop('disabled',false); 
+
+
+
+
+
+
+
+
+                  });
+
+
+
+
+
+
+
+                 
+
+
+
+   
+                  
+
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {%endblock %}

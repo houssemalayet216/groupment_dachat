@@ -1,0 +1,687 @@
+{% extends '@Back/default/templateclient.html.twig' %}
+{% block section_haider %}
+<section class="content-header">
+      <h1>
+        Tableau de bord
+        
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Tableau de bord</a></li>
+        <li class="active">Profile</li>
+      </ol>
+    </section>
+{%endblock%}
+
+  {%block content%} 
+
+  <section class="content">
+
+      <div class="row">
+      
+
+<div class="col-md-3">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+
+              {% if app.user.photo %}
+              <img class="profile-user-img img-responsive img-circle" src="{{asset('')}}uploads/logo/{{app.user.photo}}" alt="User profile picture">
+              
+                  {% else %}
+                  <img class="profile-user-img img-responsive img-circle" src="{{asset('uploads/telechargement.jpg')}}" alt="User profile picture">
+               
+                  {% endif %}
+
+             
+
+              <h3 class="profile-username text-center">{{app.user.nom}} {{app.user.prenom}}</h3>
+
+              <p class="text-muted text-center">Client</p>
+
+            
+
+             
+            </div>
+           
+          </div>
+        
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Information Génarale</h3>
+            </div>
+        
+            <div class="box-body">
+             
+
+              <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+
+              <p class="text-muted">{{app.user.ville}},{{app.user.adresse}},{{app.user.cp}}</p>
+
+              <hr>
+
+              <strong><i class="fa fa-pencil margin-r-5"></i>Téléphone</strong>
+
+              <p class="text-muted">{{app.user.telephone}}</p>
+              
+
+              
+            </div>
+           
+          </div>
+          
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="col-md-9">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+            
+              <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
+            </ul>
+            <div class="tab-content">
+           
+
+              <div class="active tab-pane" id="settings">
+                
+                 {{ form_start(form, {'method': 'post', 'action': path('modifier_profile_client'), 'attr': {'id':'edit_client','class':'form-horizontal','novalidate':'novalidate'}}) }}
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="username">Civilité :*</label>
+                    
+                       {{form_widget(form.civilite ,{'id':'civiliteclient','attr':{'class': 'form-control','placeholder':'Civilité'}})}} 
+                       <span class="text-danger" id="data.civilite"></span>
+                   
+                  </div>
+
+                  </div>
+                 
+
+                 
+                 <div class="row">
+                  <div class=" col-md-6">
+                    <label for="username">Nom :*</label>
+                    
+                       {{form_widget(form.nom ,{'id':'nomclient','attr':{'class': 'form-control','placeholder':'Nom'}})}} 
+                       <span class="text-danger" id="data.nom"></span>
+                   
+                  </div>
+
+                  <div class=" col-md-6">
+                    <label for="username">Prénom :*</label>
+                    
+                       {{form_widget(form.prenom ,{'id':'prenomclient','attr':{'class': 'form-control','placeholder':'Prénom'}})}} 
+                       <span class="text-danger" id="data.prenom"></span>
+                   
+                  </div>
+
+                  </div>
+
+                    <div class="row">
+                  <div class=" col-md-6">
+                    <label for="username">Username :*</label>
+                    
+                       {{form_widget(form.username ,{'id':'usernameclient','attr':{'class': 'form-control','placeholder':'Username'}})}} 
+                       <span class="text-danger" id="data.username"></span>
+                   
+                  </div>
+
+                  <div class=" col-md-6">
+                    <label for="username">Email :*</label>
+                    
+                       {{form_widget(form.email ,{'id':'emailclient','attr':{'class': 'form-control','placeholder':'Email'}})}} 
+                       <span class="text-danger" id="data.email"></span>
+                   
+                  </div>
+
+                  </div>
+
+                  
+
+                     <div class="row">
+                  <div class=" col-md-6">
+                    <label for="username">Ville :*</label>
+                    
+                       {{form_widget(form.ville ,{'id':'villeclient','attr':{'class': 'form-control','placeholder':'Ville'}})}} 
+                       <span class="text-danger" id="data.ville"></span>
+                   
+                  </div>
+
+                  <div class=" col-md-6">
+                   <label for="username">Adresse :*</label>
+                    
+                       {{form_widget(form.adresse ,{'id':'adresseclient','attr':{'class': 'form-control','placeholder':'Adresse'}})}} 
+                       <span class="text-danger" id="data.adresse"></span>
+                   
+                  </div>
+
+                  </div>
+
+
+                    <div class="row">
+                  <div class=" col-sm-6">
+                    <label for="username">Code postale :*</label>
+                    
+                       {{form_widget(form.cp ,{'id':'cpclient','attr':{'class': 'form-control','placeholder':'Code postale'}})}} 
+                       <span class="text-danger" id="data.cp"></span>
+                   
+                  </div>
+
+                  <div class=" col-sm-6">
+                    <label for="username">Téléphone :*</label>
+                    
+                       {{form_widget(form.telephone ,{'id':'telephoneclient','attr':{'class': 'form-control','placeholder':'Telephone'}})}} 
+                       <span class="text-danger" id="data.telephone"></span>
+                   
+                  </div>
+
+                  </div>
+
+                 
+
+                   <div class="row">
+                  <div class=" col-md-12">
+                    <label for="username">Photo :*</label>                    
+                       {{form_widget(form.photo ,{'id':'photoclient','attr':{'class': 'form-control','placeholder':'Photo'}})}} 
+                       <span class="text-danger" id="data.photo"></span>
+                   
+                  </div>
+
+
+                  </div>
+
+
+
+
+
+                  
+                  <div class="row" >
+                    <div class="col-sm-offset-4 col-sm-8" style="margin-top:10px;">
+                      <button type="submit" class="btn btn-danger" id="btn_profileclient_ajax"><span>Modifier</span><i id="spin-client"></i></button>
+                    </div>
+                  </div>
+                {{ form_end(form) }}
+
+
+
+
+
+
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {% endblock %}
+  {%block aside %}
+  {%endblock%}
+
+
+  {%block javascript%}
+
+
+
+                   $('#btn_profileclient_ajax').click(function(e){
+                  e.preventDefault();
+                    $('#btn_profileclient_ajax').prop('disabled',true);
+                  $("#spin-client").addClass('fa fa-spinner fa-spin fa-register');
+                   
+                     var username=$('#usernameclient').val();
+                  var email=$('#emailclient').val();
+                  var nom=$('#nomclient').val();
+                  var prenom=$('#prenomclient').val();
+                  var ville=$('#villeclient').val();
+                  var adresse=$('#adresseclient').val();
+                  var cp=$('#cpclient').val();
+                  var civilite=$('#civiliteclient').val();
+                  var telephone=$('#telephoneclient').val();
+                  
+
+                  
+                   var errorClientArray=['data.civilite','data.nom','data.prenom','data.username','data.email','data.ville','data.adresse','data.cp','data.telephone'];
+                    var formclient = document.getElementById("edit_client");
+
+                    if(email=="")
+                  {
+                       document.getElementById('data.emailCanonical').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-client").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profileclient_ajax').prop('disabled',false); 
+                  }
+                  
+
+                    if(username=="")
+                  {
+                       document.getElementById('data.username').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-client").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profileclient_ajax').prop('disabled',false); 
+                  }
+
+
+
+                      if(nom=="")
+                  {
+                       document.getElementById('data.nom').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-client").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profileclient_ajax').prop('disabled',false); 
+                  }
+                  
+
+                    if(prenom=="")
+                  {
+                       document.getElementById('data.prenom').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-client").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profileclient_ajax').prop('disabled',false); 
+                  }
+                    
+
+                        if(civilite=="")
+                  {
+                       document.getElementById('data.civilite').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-client").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profileclient_ajax').prop('disabled',false); 
+                  }
+                  
+
+                    if(ville=="")
+                  {
+                       document.getElementById('data.ville').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-client").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profileclient_ajax').prop('disabled',false); 
+                  }
+                  
+
+                      if(adresse=="")
+                  {
+                       document.getElementById('data.adresse').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-client").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profileclient_ajax').prop('disabled',false); 
+                  }
+                  
+
+                    if(cp=="")
+                  {
+                       document.getElementById('data.cp').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-client").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profileclient_ajax').prop('disabled',false); 
+                  }
+
+
+
+
+
+
+                        $('#emailclient').change(function(){
+                  
+                 if($.trim(document.getElementById('data.email').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.email').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#usernameclient').change(function(){
+                  
+                 if($.trim(document.getElementById('data.username').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.username').textContent="";
+                                  }
+                    
+                                 });
+
+  
+
+
+
+                   $('#nomclient').change(function(){
+                  
+                 if($.trim(document.getElementById('data.nom').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.nom').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#prenomclient').change(function(){
+                  
+                 if($.trim(document.getElementById('data.prenom').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.prenom').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+                                   $('#civiliteclient').change(function(){
+                  
+                 if($.trim(document.getElementById('data.civilite').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.civilite').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#villeclient').change(function(){
+                  
+                 if($.trim(document.getElementById('data.ville').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.ville').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                   $('#adresseclient').change(function(){
+                  
+                 if($.trim(document.getElementById('data.adresse').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.adresse').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#cpclient').change(function(){
+                  
+                 if($.trim(document.getElementById('data.cp').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.cp').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+                                 $('#telephoneclient').change(function(){
+                  
+                 if($.trim(document.getElementById('data.telephone').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.telephone').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+
+
+
+
+
+
+
+           if(email!==""&&username!==""&&nom!==""&&prenom!==""&&ville!==""&&adresse!==""&&cp!==""&&civilite!==""&&telephone!=="")
+
+             {
+                      $.ajax({
+                       dataType:"json",
+                       url:$("#edit_client").attr('action'),
+                       type:$("#edit_client").attr('method'),
+                        data:new FormData(formclient),
+                       contentType:false,
+                       processData:false,
+                       cache:false,
+                       success:function (data,status,object)
+                       {
+
+                      
+                       var message=data.message;
+                       if(data.success==true)
+                          {
+
+                              
+                         
+                               errorClientArray.forEach(function(error){
+                                  if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+                               });
+                             
+                                  $("#spin-client").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profileclient_ajax').prop('disabled',false);
+                            
+
+                            document.location.reload(true);
+
+
+                            toastr.success(message,'Success', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+                            
+
+                          }
+
+                          else{
+
+                             toastr.error(message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+
+
+
+                            if(data.errors)
+                            {
+                                 console.log(data.errors);
+
+                                $("#spin-client").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profileclient_ajax').prop('disabled',false);
+
+                              errorClientArray.forEach(function(error){
+
+                               if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+
+                              });
+
+                              data.errors.forEach(function(error)
+                              {
+
+                               document.getElementById(error.elementId).textContent=error.errorMessage;
+                              });
+
+                            }
+
+                          }
+                                
+
+                        
+                         $("#spin-client").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profileclient_ajax').prop('disabled',false); 
+                          
+
+                          },
+                          error:function (data,status,object)
+                          {
+                             console.log(data.message);
+                          }
+
+
+
+
+
+
+
+
+                       });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     }
+
+
+
+
+
+
+
+
+
+
+
+                     $("#spin-client").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_profileclient_ajax').prop('disabled',false); 
+
+
+
+
+                  });
+
+
+
+
+
+
+
+                 
+
+
+
+   
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {%endblock %}

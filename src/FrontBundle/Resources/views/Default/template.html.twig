@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <!-- Title -->
+  <title>Famie</title>
+  <!-- Favicon -->
+  <link rel="icon" href="img/core-img/favicon.ico">
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="{{asset('frontFolder/style.css')}}">
+    <link rel="stylesheet" href="{{asset('frontFolder/css/st.css')}}">
+  
+       <link rel="stylesheet" href="{{asset('frontFolder/css/stt.css')}}"> 
+       <link rel="stylesheet" href="{{asset('frontFolder/css/category.css')}}">
+           <link rel="stylesheet" href="{{asset('frontFolder/cart.css')}}">
+            <link rel="stylesheet" href="{{asset('frontFolder/styleuser.css')}}">
+            <link rel="stylesheet" href="{{asset('frontFolder/login.css')}}">
+             <link rel="stylesheet" href="{{asset('frontFolder/register.css')}}">
+
+             {%block stylesheet%}
+             {% endblock%}
+</head>
+<body>
+  {%block header %}
+  <!-- Preloader -->
+  {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+
+
+
+
+
+ <div class="preloader d-flex align-items-center justify-content-center">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- ##### Header Area Start ##### -->
+  <header class="header-area">
+    <!-- Top Header Area -->
+    <div class="top-header-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="top-header-content d-flex align-items-center justify-content-between" style="  height: 50px;">
+              <!-- Top Header Content -->
+              <div class="top-header-meta">
+                <p>Welcome to <span> Farmie </span></p>
+              </div>
+              <!-- Top Header Content -->
+              <div class="top-header-meta text-right">
+               {% if is_granted('ROLE_FOURNISSEUR') %} 
+                <a href="{{path('gestion_offres')}}" class="btn btn-green btn-sm" style="margin-right: 10px; color:#fff;"><i class="fa fa-plus" aria-hidden="true"></i> <span> Publier une offre</span></a>
+               {% endif %}
+                <a href="{{path('fos_user_security_logout')}}"><i class="fa fa-sign-out" aria-hidden="true" ></i> <span>Logout</span></a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar Area -->
+    <div class="famie-main-menu">
+      <div class="classy-nav-container breakpoint-off">
+        <div class="container">
+          <!-- Menu -->
+          <nav class="classy-navbar justify-content-between" id="famieNav">
+            <!-- Nav Brand -->
+            <a href="{{path('frontpage')}}" class="nav-brand"><img src="{{asset('frontFolder/img/core-img/logo.png')}}" alt=""></a>
+            <!-- Navbar Toggler -->
+            <div class="classy-navbar-toggler">
+              <span class="navbarToggler"><span></span><span></span><span></span></span>
+            </div>
+            <!-- Menu -->
+            <div class="classy-menu">
+              <!-- Close Button -->
+              <div class="classycloseIcon">
+                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+              </div>
+              <!-- Navbar Start -->
+              <div class="classynav" >
+                
+                <ul style="margin-right: 100px;margin-bottom: 0px;">
+                  <li ><a href="{{path('filtrer_par_categorie',{'categorie':'Fruits'})}}">Fruits </a>
+
+                     <ul class="dropdown">
+                        {%for fruit in menu().fruits %}
+                      <li><a href="{{path('filter_par_produit' , {'produit':fruit.titre})}}">{{fruit.titre}}</a></li>
+                        {% endfor %}
+                     
+                    </ul>
+
+                  </li>
+                  <li><a href="{{path('filtrer_par_categorie',{'categorie':'Légumes'})}}">Légumes</a>
+                     <ul class="dropdown">
+                      {%for leguime in menu().leguimes %}
+                      <li><a href="{{path('filter_par_produit' , {'produit':leguime.titre})}}">{{leguime.titre}}</a></li>
+                      {% endfor %}
+                    </ul>
+
+
+                  </li>
+                  <li><a href="{{path('filtrer_par_categorie',{'categorie':'Fruits de la saison'})}}">Fruits de la saison</a>
+                  </li>
+                  <li><a href="{{path('filtrer_par_categorie',{'categorie':'Nouveaux produits'})}}">Nouveaux produits</a>
+
+                  </li>
+               
+                  
+                </ul>
+                <div>
+
+
+                <!-- Search Icon -->
+                <div id="searchIcon">
+                  <i class="icon_search" aria-hidden="true"></i>
+                </div>
+                <!-- Cart Icon -->
+                <div id="cartIcon" class="mini_cart_wrapper">
+                  <a href="{{path('user_cart')}}" style="font-size: 18px;">
+                    <i class="icon_cart_alt" aria-hidden="true"></i>
+                    <span class="count-product"></span>
+                  </a>
+
+                 
+
+
+
+
+
+
+                </div>
+                
+                <div class="userconnected">
+
+                   {% if  is_granted('ROLE_CLIENT') %}
+                   {% if app.user.photo  %}
+                     <img src="{{asset('')}}uploads/logo/{{app.user.photo}}" style="width:35px;height: 35px;border-radius: 50%;" class="img-circle">
+                   {%else%}
+                     <img src="{{asset('uploads/telechargement.jpg')}}" style="width:35px;height: 35px;border-radius: 50%;" class="img-circle">
+                   {%endif%}
+                <a href="{{path('espacepage')}}" class="userdropdown" style="margin-left:4px;">{{app.user.nom}} {{app.user.prenom}}
+                  
+                 
+
+                  </a>
+
+
+                  {% endif%}
+
+
+                   {% if  is_granted('ROLE_FOURNISSEUR') %}
+                    
+                     {% if app.user.logo  %}
+                     <img src="{{asset('')}}uploads/logo/{{app.user.logo}}" style="width:35px;height: 35px;border-radius: 50%;" class="img-circle">
+                   {%else%}
+                     <img src="{{asset('uploads/telechargement.jpg')}}" style="width:35px;height: 35px;border-radius: 50%;" class="img-circle">
+                   {%endif%}
+
+
+                  <a href="{{path('espacepage')}}" class="userdropdown" style="margin-left:4px;">{{app.user.responsable}} 
+                   
+                    
+                  </a>
+
+
+                  {% endif%}
+
+
+
+                </div>
+               
+              </div>
+              <!-- Navbar End -->
+            </div>
+          </nav>
+
+          <!-- Search Form -->
+          <div class="search-form">
+            <form action="#" method="get">
+              <input type="search" name="search" id="search" placeholder="Type keywords &amp; press enter...">
+              <button type="submit" class="d-none"></button>
+            </form>
+            <!-- Close Icon -->
+            <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{%else%}
+
+   
+  <div class="preloader d-flex align-items-center justify-content-center">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- ##### Header Area Start ##### -->
+  <header class="header-area">
+    <!-- Top Header Area -->
+    <div class="top-header-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="top-header-content d-flex align-items-center justify-content-between" style="  height: 50px;">
+              <!-- Top Header Content -->
+              <div class="top-header-meta">
+                <p>Welcome to <span> Farmie </span></p>
+              </div>
+              <!-- Top Header Content -->
+              <div class="top-header-meta text-right">
+                <a href="{{path('gestion_offres')}}" class="btn btn-green btn-sm" style="margin-right: 10px; color:#fff;"><i class="fa fa-plus" aria-hidden="true"></i> <span> Publier une offre</span></a>
+                <a href="{{path('fos_user_registration_register')}}"  style="margin-right: 3px;"><i class="fa fa-sign-in" aria-hidden="true"  ></i> <span>Inscription </span></a>
+                <a href="{{path('fos_user_security_login')}}"><i class="fa fa-user" aria-hidden="true" ></i> <span>Se connecter</span></a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar Area -->
+    <div class="famie-main-menu">
+      <div class="classy-nav-container breakpoint-off">
+        <div class="container">
+          <!-- Menu -->
+          <nav class="classy-navbar justify-content-between" id="famieNav">
+            <!-- Nav Brand -->
+            <a href="{{path('frontpage')}}" class="nav-brand"><img src="{{asset('frontFolder/img/core-img/logo.png')}}" alt=""></a>
+            <!-- Navbar Toggler -->
+            <div class="classy-navbar-toggler">
+              <span class="navbarToggler"><span></span><span></span><span></span></span>
+            </div>
+            <!-- Menu -->
+            <div class="classy-menu">
+              <!-- Close Button -->
+              <div class="classycloseIcon">
+                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+              </div>
+              <!-- Navbar Start -->
+              <div class="classynav" >
+                
+                   <ul style="margin-right: 200px;margin-bottom: 0px;">
+                  <li ><a href="{{path('filtrer_par_categorie',{'categorie':'Fruits'})}}">Fruits </a>
+
+                     <ul class="dropdown">
+                        {%for fruit in menu().fruits %}
+                      <li><a href="{{path('filter_par_produit' , {'produit':fruit.titre})}}">{{fruit.titre}}</a></li>
+                        {% endfor %}
+                     
+                    </ul>
+
+                  </li>
+                  <li><a href="{{path('filtrer_par_categorie',{'categorie':'Légumes'})}}">Légumes</a>
+                     <ul class="dropdown">
+                      {%for leguime in menu().leguimes %}
+                      <li><a href="{{path('filter_par_produit' , {'produit':leguime.titre})}}">{{leguime.titre}}</a></li>
+                      {% endfor %}
+                    </ul>
+
+
+                  </li>
+                  <li><a href="{{path('filtrer_par_categorie',{'categorie':'Fruits de la saison'})}}">Fruits de la saison</a>
+                  </li>
+                  <li><a href="{{path('filtrer_par_categorie',{'categorie':'Nouveaux produits'})}}">Nouveaux produits</a>
+
+                  </li>
+               
+                  
+                </ul>
+
+
+
+               
+                <div>
+                <!-- Search Icon -->
+                <div id="searchIcon">
+                  <i class="icon_search" aria-hidden="true"></i>
+                </div>
+                <!-- Cart Icon -->
+                <div id="cartIcon" class="mini_cart_wrapper">
+                  <a href="{{path('user_cart')}}" style="font-size: 18px;">
+                    <i class="icon_cart_alt" aria-hidden="true"></i>
+                    <span id="span-count-product" class=" count-product"></span>
+                  </a>
+
+                 
+
+
+
+
+                </div>
+              </div>
+              <!-- Navbar End -->
+            </div>
+          </nav>
+
+          <!-- Search Form -->
+          <div class="search-form">
+            <form action="#" method="get">
+              <input type="search" name="search" id="search" placeholder="Type keywords &amp; press enter...">
+              <button type="submit" class="d-none"></button>
+            </form>
+            <!-- Close Icon -->
+            <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+{%endif%}
+
+
+  {%endblock%}
+  <!-- ##### Header Area End ##### -->
+
+  <!-- ##### Hero Area Start ##### -->
+  {%block slider%}
+  {%endblock%}
+
+
+  
+
+
+
+  {% block pageContainer %}
+      {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- ##### News Area End ##### -->
+
+  <!-- ##### Footer Area Start ##### -->
+  {%block footer %}
+  <footer class="footer-area">
+
+   
+    <div class="main-footer bg-img bg-overlay section-padding-80-0" style="background-color: #363636;">
+      <div class="container">
+        <div class="row">
+
+          <!-- Single Footer Widget Area -->
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="footer-widget mb-80">
+              <a href="#" class="foo-logo d-block mb-30"><img src="{{asset('frontFolder/img/core-img/logo2.png')}}" alt=""></a>
+              <p>Platform d'achet en lot, en quantité, des produits d'exception aux meilleurs prix .</p>
+              <div class="contact-info">
+                <p><i class="fa fa-map-pin" aria-hidden="true"></i><span>SQLI Services,Technopole Manouba,Tunisie </span></p>
+                <p><i class="fa fa-envelope" aria-hidden="true"></i><span>contact@sqliservice.com/span></p>
+                <p><i class="fa fa-phone" aria-hidden="true"></i><span>+216 71 123 456</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Single Footer Widget Area -->
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="footer-widget mb-80">
+             
+              <!-- Footer Widget Nav -->
+              <nav class="footer-widget-nav">
+                <ul>
+                  <li><a href="#">Acceille</a></li>
+                  <li><a href="#">Politique</a></li>
+                  <li><a href="#">Cart</a></li>
+                  <li><a href="#">FAQs</a></li>
+                  <li><a href="#">Favorite</a></li>
+                  <li><a href="#">Careers</a></li>
+                  <li><a href="#">Payments</a></li>
+                  <li><a href="#">Partners</a></li>
+                  <li><a href="#">Guide</a></li>
+                  <li><a href="#">Standard</a></li>
+                  <li><a href="#">News</a></li>
+                  <li><a href="#">Brands</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <!-- Single Footer Widget Area -->
+         
+
+          <!-- Single Footer Widget Area -->
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="footer-widget mb-80">
+              
+              <!-- Footer Social Info -->
+              <div class="footer-social-info">
+                <a href="#">
+                  <i class="fa fa-facebook" aria-hidden="true"></i>
+                  <span>Facebook</span>
+                </a>
+                <a href="#">
+                  <i class="fa fa-twitter" aria-hidden="true"></i>
+                  <span>Twitter</span>
+                </a>
+                <a href="#">
+                  <i class="fa fa-linkedin" aria-hidden="true"></i>
+                  <span>Linkedin</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Copywrite Area  -->
+    <div class="copywrite-area">
+      <div class="container">
+        <div class="copywrite-text">
+          <div class="row align-items-center">
+            <div class="col-md-12 text-center" >
+              <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script>  SQLI Services Tous les droits réservés 
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</p>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  {% endblock %}
+  <!-- ##### Footer Area End ##### -->
+
+  <!-- ##### All Javascript Files ##### -->
+  <!-- jquery 2.2.4  -->
+
+  <script src="{{asset('frontFolder/js/jquery.min.js')}}"></script>
+  <!-- Popper js -->
+  <script src="{{asset('frontFolder/js/popper.min.js')}}"></script>
+  <!-- Bootstrap js -->
+  <script src="{{asset('frontFolder/js/bootstrap.min.js')}}"></script>
+  <!-- Owl Carousel js -->
+  <script src="{{asset('frontFolder/js/owl.carousel.min.js')}}"></script>
+  <!-- Classynav -->
+  <script src="{{asset('frontFolder/js/classynav.js')}}"></script>
+  <!-- Wow js -->
+  <script src="{{asset('frontFolder/js/wow.min.js')}}"></script>
+  <!-- Sticky js -->
+  <script src="{{asset('frontFolder/js/jquery.sticky.js')}}"></script>
+  <!-- Magnific Popup js -->
+  <script src="{{asset('frontFolder/js/jquery.magnific-popup.min.js')}}"></script>
+  <!-- Scrollup js -->
+  <script src="{{asset('frontFolder/js/jquery.scrollup.min.js')}}"></script>
+  <!-- Jarallax js -->
+  <script src="{{asset('frontFolder/js/jarallax.min.js')}}"></script>
+  <!-- Jarallax Video js -->
+  <script src="{{asset('frontFolder/js/jarallax-video.min.js')}}"></script>
+  <!-- Active js -->
+  <script src="{{asset('frontFolder/js/active.js')}}"></script>
+   <script src="{{asset('frontFolder/users.js')}}"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+
+  <script type="text/javascript">
+    $('.owl-carousel').owlCarousel({
+  loop: true,
+  margin: 30,
+  dots: true,
+  nav: false,
+  responsiveClass: true,
+  responsive: {
+    0: {
+      items: 2,
+      margin: 10,
+      stagePadding: 20,
+    },
+    600: {
+      items: 3,
+      margin: 20,
+      stagePadding: 50,
+    },
+    1000: {
+      items: 4
+    }
+  }
+});
+
+
+
+  </script>
+
+
+
+<script type="text/javascript">
+  
+
+  $(document).ready(function(){
+    $('.customer-logos').slick({
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 1500,
+        arrows: false,
+        dots: false,
+        pauseOnHover: false,
+        responsive: [{
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 4
+            }
+        }, {
+            breakpoint: 520,
+            settings: {
+                slidesToShow: 3
+            }
+        }]
+    });
+});
+</script>
+
+
+<script type="text/javascript">
+  
+
+var counterpanier;
+
+
+function getCounterPanier()
+{
+  $.ajax({
+
+    url:"{{path('getcounterpanier')}}",
+   method:"GET",
+   success:function(data)
+    {
+    if(data.success==true)
+    {
+     
+     counterpanier=data.counter;
+     console.log(counterpanier);
+     verifPanier();
+
+
+    }else{
+       
+      counterpanier=0; 
+
+    }
+
+
+  },error:function()
+  {
+    counterpanier=0;
+
+  }
+
+
+
+  });
+}
+
+
+
+
+
+function verifPanier()
+{
+ if(counterpanier > 0)
+{
+  $('#span-count-product').addClass('cart-quantity');
+  $('#span-count-product').html(counterpanier);
+}
+if(counterpanier < 1 )
+{
+   $('#span-count-product').removeClass('cart-quantity');
+  $('#span-count-product').html('');
+}
+}
+
+
+
+
+  $(document).ready(function(){
+
+getCounterPanier();
+
+
+
+
+
+
+
+$('#btn-ajouter-item').click(function(){
+ 
+
+
+ 
+ var id_product=$(this).data('productid');
+
+ $.ajax({
+    
+    url:"{{path('insertinsession')}}",
+        method:"POST",
+        data:{'id_product':id_product},
+        success:function(data)
+                    {
+                    if(data.success==true)
+                    {
+          counterpanier++;
+ $('#btn-ajouter-item').attr("disabled", true);
+ verifPanier();
+
+
+
+                    }
+                    } 
+
+ });
+
+ 
+
+
+});
+
+
+});
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+{%block javascript %}
+    
+
+
+
+     {% endblock %}
+    </script>
+
+
+
+
+
+
+
+</body>
+
+</html>

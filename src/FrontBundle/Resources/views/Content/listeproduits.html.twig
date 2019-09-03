@@ -1,0 +1,290 @@
+{% extends '@Front/default/template.html.twig' %}
+
+
+ {%block stylesheet%}
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="{{asset('frontFolder/cart.css')}}">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+<style>
+
+.pagination>.active>span{
+      background-color: #84ac49;
+    border-color: #84ac49;
+}
+</style>
+
+ {% endblock %}
+
+  {%block slider%}
+  {%endblock%}
+
+   {% block pageContainer %}
+
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div class="banner_content d-md-flex justify-content-between align-items-center" style="display: flex;
+    justify-content: space-between;">
+            <div class="mb-3 mb-md-0">
+              <h2>Produits</h2>
+              <p>Liste des produits </p>
+            </div>
+            <div class="page_link">
+              <a href="index.html">Home</a>
+              <a href="cart.html">Produits</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    
+ <section class="shop-area section-padding-0-100" style="margin-top:30px;">
+    <div class="container">
+
+      <div class="row">
+        <!-- Shop Filters -->
+        <div class="col-12">
+          <div class="shop-filters mb-30 d-flex align-items-center justify-content-between">
+            <!-- Product Show -->
+            <div class="product-show">
+              <h6>Showing 1–9 of 72 results   </h6>
+            </div>
+
+            <!-- Product View Mode -->
+            <div class="produtc-view-mode">
+              <a href="#"><i class="fa fa-th"></i></a>
+              <a href="#"><i class="fa fa-list-ul"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Shop Sidebar Area -->
+        <div class="col-12 col-md-4 col-lg-3">
+
+         
+
+          <!-- Single Widget Area -->
+          <div class="single-widget-area">
+            <!-- Title -->
+            <h5 class="widget-title">Catagories</h5>
+            <!-- Cata List -->
+            <ul class="cata-list shop-page">
+              <li><a href="#">Tous produits (720)</a></li>
+              <li><a href="#">Fruits (300)</a></li>
+              <li><a href="#">Léguimes (450)</a></li>
+              <li><a href="#">Nouveaux produits (100)</a></li>
+              <li><a href="#">Fruits de la saison (150)</a></li>
+              <li><a href="#">Others (40)</a></li>
+            </ul>
+          </div>
+
+          <!-- Single Widget Area -->
+          <div class="single-widget-area">
+            <!-- Title -->
+            <h5 class="widget-title">Sort by</h5>
+            <!-- Cata List -->
+            <ul class="cata-list shop-page">
+              <li><a href="#">Top rated</a></li>
+              <li><a href="#">Nouveau produits</a></li>
+              <li><a href="#">Alphabetic, A-Z</a></li>
+              <li><a href="#">Alphabetic, Z-A</a></li>
+              <li><a href="#">Price: bas to haut</a></li>
+              <li><a href="#">Price: haut to bas</a></li>
+            </ul>
+          </div>
+
+          <!-- Single Widget Area -->
+          <div class="single-widget-area">
+            <!-- Title -->
+            <h5 class="widget-title">Price</h5>
+            <!-- Cata List -->
+            <ul class="cata-list shop-page">
+              <li><a href="#">1.00 DT - 10.00 DT</a></li>
+              <li><a href="#">10.00 DT - 50.00 DT</a></li>
+              <li><a href="#">50.00 DT - 100.00 DT</a></li>
+              <li><a href="#">100.00 DT+</a></li>
+            </ul>
+          </div>
+
+          <!-- Single Widget Area -->
+          <div class="single-widget-area">
+            <!-- Title -->
+            <h5 class="widget-title">Tags</h5>
+            <!-- Tags -->
+            <ul class="famie-tags">
+              <li><a href="#">Tomate</a></li>
+              <li><a href="#">Pomme</a></li>
+              <li><a href="#">Oignant</a></li>
+              <li><a href="#">Fraise</a></li>
+              <li><a href="#">Peche</a></li>
+              <li><a href="#">Melon</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Shop Products Area -->
+        <div class="col-12 col-md-8 col-lg-9">
+
+
+         {% if listeprodsCatgories is defined and   listeProduitsCat!=null  %}
+
+             
+                
+                
+
+
+          <div class="row">
+
+            
+            
+             {% for listprod in listeprodsCatgories %}
+
+
+            <div class="col-12 col-sm-6 col-lg-4"  style="margin-top:50px;">
+             
+             
+             <div class="productCard " data-productid="{{listprod.id}}">
+    <div class="productCard-imageWrapper"> 
+     <a title="Nectarine blanche" href="{{path('produit_detailles',{'id':listprod.id})}}" class="b-lazy productCard-image product-link-detail-target b-loaded" style="background-image: url(&quot;{{asset('')}}uploads/logo/{{listprod.image}}&quot;);"></a>
+         </div>
+          <div class="productCard-details"> 
+            <div class="productCard-actionWrapper"> 
+              <div class="productCard-price"> {{listprod.prix}} </div> 
+              <div class="addToCart" > 
+                <button id="btn-ajouter-item" class="btn btn-ajouter-panier btn-green addFirstItem" data-productid="{{listprod.id}}" data-type-of-list="section_homepage_1" >Ajouter</button> </div> </div>  <div class="kl productCard-producer" > 
+
+                <div class="producer-img-wrapper">
+                {% if listprod.user.logo  %}
+                 <img src="{{asset('')}}uploads/logo/{{listprod.user.logo}}"  alt="User Image">
+                 {%else%}
+                 <img src="{{asset('uploads/telechargement.jpg')}}"  alt="User Image">
+                 {%endif%} 
+
+                 </div> <div class="producer-name" >{{listprod.user.responsable}}</div> </div> <div class="productCard-main"> <a class="productCard-name product-link-detail-target" href="{{path('produit_detailles',{'id':listprod.id})}}"> {{listprod.titre}} </a> <div class="productCard-price"> {{listprod.prix}} DT</div> </div> <div class="productCard-stats"> <div>Tiket {{listprod.tiket}} Kg</div> <div>{{listprod.tiket * listprod.prix  }} DT/Tiket</div> </div> </div> </div>
+
+
+
+            </div>
+
+
+            {%endfor%}
+         
+
+           
+
+          </div>
+
+          <!-- Pagination -->
+          <div class="text-center">
+            <div >{{ knp_pagination_render(listeprodsCatgories) }}</div>
+          </div>
+          
+          </div>
+
+          {% endif %}
+
+          {%if listeprodsCatgories is defined and   listeProduitsCat==null  %}
+          <div class="row">
+            <div><h4>Aucun Annonce trouvé</h4></div>
+            </div>
+
+             {%endif%}
+
+
+
+
+
+
+
+               {% if listeprods is defined and   prod!=null  %}
+
+             
+                
+                
+
+
+          <div class="row">
+
+            
+            
+             {% for list in listeprods %}
+
+
+            <div class="col-12 col-sm-6 col-lg-4" style="margin-top:50px;">
+             
+             
+             <div class="productCard " data-productid="{{list.id}}">
+    <div class="productCard-imageWrapper"> 
+     <a title="Nectarine blanche" href="{{path('produit_detailles',{'id':list.id})}}" class="b-lazy productCard-image product-link-detail-target b-loaded" style="background-image: url(&quot;{{asset('')}}uploads/logo/{{list.image}}&quot;);"></a>
+         </div>
+          <div class="productCard-details"> 
+            <div class="productCard-actionWrapper"> 
+              <div class="productCard-price"> {{list.prix}} </div> 
+              <div class="addToCart" > 
+                <button id="btn-ajouter-item" class="btn btn-ajouter-panier btn-green addFirstItem" data-productid="{{list.id}}" data-type-of-list="section_homepage_1" >Ajouter</button> </div> </div>  <div class="kl productCard-producer" > 
+
+                <div class="producer-img-wrapper">
+                {% if list.user.logo  %}
+                 <img src="{{asset('')}}uploads/logo/{{list.user.logo}}"  alt="User Image">
+                 {%else%}
+                 <img src="{{asset('uploads/telechargement.jpg')}}"  alt="User Image">
+                 {%endif%} 
+
+                 </div> <div class="producer-name" >{{list.user.responsable}}</div> </div> <div class="productCard-main"> <a class="productCard-name product-link-detail-target" href="{{path('produit_detailles',{'id':list.id})}}"> {{list.titre}} </a> <div class="productCard-price"> {{list.prix}} DT</div> </div> <div class="productCard-stats"> <div>Tiket {{list.tiket}} Kg</div> <div>{{list.tiket * list.prix  }} DT/Tiket</div> </div> </div> </div>
+
+
+
+            </div>
+
+
+            {%endfor%}
+         
+
+           
+
+          </div>
+
+          <!-- Pagination -->
+          <div class="text-center">
+            <div  >{{ knp_pagination_render(listeprods) }}</div>
+          </div>
+          
+        
+
+          {% endif %}
+
+          {%if listeprods is defined and   prod==null  %}
+          <div class="row">
+            <div><h4>Aucun Annonce trouvé</h4></div>
+            </div>
+
+             {%endif%}
+
+
+
+
+              </div>
+
+
+        </div>
+      
+  </section>
+
+
+
+
+
+
+
+    {%endblock%}

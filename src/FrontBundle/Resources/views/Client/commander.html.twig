@@ -1,0 +1,271 @@
+{% extends '@Front/default/template.html.twig' %}
+ {%block stylesheet%}
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="{{asset('frontFolder/cart.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('frontFolder/commande.css')}}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+ {% endblock %}
+
+  {%block slider%}
+  {%endblock%}
+
+   {% block pageContainer %}
+   <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div class="banner_content d-md-flex justify-content-between align-items-center" style="display: flex;
+    justify-content: space-between;">
+            <div class="mb-3 mb-md-0">
+              <h2>Valider Commande</h2>
+              <p>Valider votre commande</p>
+            </div>
+            <div class="page_link">
+              <a href="index.html">Home</a>
+              <a href="checkout.html">Valider commande</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+
+
+ <section class="checkout_area section_gap">
+      <div class="container">
+       
+        
+
+                 
+       
+
+                 
+       
+      
+        <div class="billing_details">
+          <div class="row">
+            <div class="col-lg-8">
+              <h3>Billing Details</h3>
+            
+                
+                  {{ form_start(form, {'method': 'post', 'action': path('valider_commander',{'id':id}), 'attr': {'id':'modifier-offre-form','class':'row contact_form',  'novalidate' : 'novalidate'}}) }}
+
+                  
+       
+                <div class="col-md-6 form-group p_star">
+                 {{form_widget(form.nom ,{'id':'nom-user','attr':{'class': 'form-control','placeholder':'Nom'}})}}                 
+                    <span class="text-danger" id="data.nom">{{form_errors(form.nom)}}</span>
+                 
+                  
+                </div>
+
+                <div class="col-md-6 form-group p_star">
+                   {{form_widget(form.prenom ,{'id':'prenom-user','attr':{'class': 'form-control','placeholder':'Prenom'}})}}                 
+                    <span class="text-danger" id="data.prenom">{{form_errors(form.prenom)}}</span>
+                 
+                </div>
+                <div class="col-md-12 form-group">
+                  {{form_widget(form.email ,{'id':'email-user','attr':{'class': 'form-control','placeholder':'Email'}})}}                 
+                    <span class="text-danger" id="data.email">{{form_errors(form.email)}}</span>
+
+
+                </div>
+                <div class="col-md-12 form-group p_star">
+                  {{form_widget(form.telephone ,{'id':'telephone-user','attr':{'class': 'form-control','placeholder':'Telephone'}})}}                 
+                    <span class="text-danger" id="data.telephone">{{form_errors(form.telephone)}}</span>
+                 
+                </div>
+                
+                <div class="col-md-12 form-group p_star">
+                  
+                  {{form_widget(form.ville ,{'id':'ville-user','attr':{'class': 'form-control','placeholder':'Ville'}})}}                 
+                    <span class="text-danger" id="data.ville">{{form_errors(form.ville)}}</span>
+                </div>
+
+                <div class="col-md-12 form-group p_star">
+                 {{form_widget(form.adresse ,{'id':'adresse-user','attr':{'class': 'form-control','placeholder':'Adresse 1'}})}}                 
+                    <span class="text-danger" id="data.adresse">{{form_errors(form.adresse)}}</span>
+                 
+                </div>
+                <div class="col-md-12 form-group p_star">
+                  {{form_widget(form.adress ,{'id':'adress-user','attr':{'class': 'form-control','placeholder':'Adresse 2'}})}}                 
+                    <span class="text-danger" id="data.adress">{{form_errors(form.adress)}}</span>
+                 
+                </div>
+                <div class="col-md-12 form-group p_star">
+                  {{form_widget(form.cp ,{'id':'cp-user','attr':{'class': 'form-control','placeholder':'Code postale'}})}}                 
+                    <span class="text-danger" id="data.cp">{{form_errors(form.cp)}}</span>
+                  
+                </div>
+                <div class="col-md-6 col-md-offset-4">
+               <input type="submit" value="Valider Commande" style="transition:none;" class="btn btn-success"/>
+
+                </div>
+
+                 {{ form_end(form) }}
+             
+            </div>
+            <div class="col-lg-4">
+              <div class="order_box">
+                <h2>Your Order</h2>
+                <ul class="list">
+                  <li>
+                    <a href="#">Produit
+                      <span>{{produit}}</span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#">Pu
+                      <span>{{prix}} DT</span>
+                    </a>
+                  </li>
+
+
+                   <li>
+                    <a href="#">Tiket(kg)
+                      <span>{{tik}} kg</span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#">NbrTiket
+                      <span>{{nbrtikets}}</span>
+                    </a>
+                  </li>
+
+
+
+
+                  <li>
+                    <a href="#">
+                      <span class="middle">{{prix * tik }} DT    </span>
+                      <span class="last">x {{nbrtikets}} </span>
+                    </a>
+                  </li>
+                </ul>
+                 
+                <ul class="list list_2">
+                  <li>
+                    <a href="#">Totale
+                      <span>{{totale}} DT</span>
+                    </a>
+                  </li>
+                  
+                    
+                </ul>
+                
+                
+                
+
+               
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+   {% endblock %}
+
+   {%block javascript%}
+
+    
+                                 $('#nom-user').change(function(){
+                  
+                 if($.trim(document.getElementById('data.nom').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.nom').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#prenom-user').change(function(){
+                  
+                 if($.trim(document.getElementById('data.prenom').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.prenom').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#email-user').change(function(){
+                  
+                 if($.trim(document.getElementById('data.email').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.email').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#telephone-user').change(function(){
+                  
+                 if($.trim(document.getElementById('data.telephone').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.telephone').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#ville-user').change(function(){
+                  
+                 if($.trim(document.getElementById('data.ville').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.ville').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#adresse-user').change(function(){
+                  
+                 if($.trim(document.getElementById('data.adresse').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.adresse').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#adress-user').change(function(){
+                  
+                 if($.trim(document.getElementById('data.adress').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.adress').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#cp-user').change(function(){
+                  
+                 if($.trim(document.getElementById('data.cp').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.cp').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+
+
+   {% endblock %}

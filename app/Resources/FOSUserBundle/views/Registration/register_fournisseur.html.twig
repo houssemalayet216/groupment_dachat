@@ -1,0 +1,677 @@
+  
+        <div class="row">
+
+          <div class="col-md-9 mobile-pull">
+            <article role="login">
+              <h3 class="text-center"><i class="fa fa-lock"></i> Créer compte fournisseur</h3>
+             
+                         {{ form_start(formfournisseur, {'method': 'post','action': path('fournisseur_register'), 'attr': {'class': 'fos_user_registration' ,'id':'register_fournisseur_ajax' ,'novalidate':'novalidate'}}) }}
+
+
+
+                               
+
+
+                                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                         <label for="username">Responsable :*</label>
+                       {{form_widget(formfournisseur.responsable,{'id':'responsable-register-fournisseur', 'attr': {'class': 'form-control input-buttom', 'placeholder': 'Nom et prenom du responsable' } })}}
+                           <span class="text-danger" id="data.responsable"></span>
+                    </div>
+                  </div>
+                </div>
+
+
+                                 
+                <div class="row">
+                  <div class="col-md-6 ">
+                    <div class="form-group">
+                       <label for="username">Ville :*</label>
+                      {{form_widget(formfournisseur.ville,{'id':'ville-register-fournisseur' ,'attr': {'class': 'form-control input-buttom', 'placeholder': 'Ville' } })}}
+                                       <span class="text-danger" id="data.ville"></span>  
+
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                       <label for="username">Adresse :*</label>
+                      {{form_widget(formfournisseur.adresse,{'id':'adresse-register-fournisseur' ,'attr': {'class': 'form-control input-buttom', 'placeholder': 'Adresse' } })}}
+                                       <span class="text-danger" id="data.adresse"></span>
+                      
+                    </div>
+                  </div>
+                </div>
+                                
+                                <div class="row">
+                  <div class="col-md-6 ">
+                    <div class="form-group">
+                        <label for="username">Code Postale :*</label>
+                      {{form_widget(formfournisseur.cp,{'id':'cp-register-fournisseur' ,'attr': {'class': 'form-control input-buttom', 'placeholder': 'Code postale' } })}}
+                                       <span class="text-danger" id="data.cp"></span> 
+
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                       <label for="username">Telephone :*</label>
+                      {{form_widget(formfournisseur.telephone,{'id':'telephone-register-fournisseur' ,'attr': {'class': 'form-control input-buttom', 'placeholder': 'Telephone' } })}}
+                                       <span class="text-danger" id="data.telephone"></span>
+                      
+                    </div>
+                  </div>
+                </div>
+
+                                  
+
+                                  <div class="row">
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                     <label for="username">Fonction :*</label>
+                       {{form_widget(formfournisseur.fonction,{'id':'fonction-register-fournisseur' ,'attr': {'class': 'form-control input-buttom', 'placeholder': 'Fonction' } })}}
+                           <span class="text-danger" id="data.fonction"></span>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!-- /row -->
+                <div class="row">
+                                  <div class="col-md-6">
+                    <div class="form-group">
+                     <label for="username">Username :*</label>
+                     {{form_widget(formfournisseur.username,{'id':'username-register-fournisseur', 'attr': {'class': 'form-control input-buttom', 'placeholder': 'Username' } })}}
+                             <span class="text-danger" id="data.username"></span> 
+
+
+                    </div>
+                  </div> 
+
+
+
+
+
+
+
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                     <label for="username">Email :*</label>
+                     {{form_widget(formfournisseur.email,{ 'id':'email-register-fournisseur','attr': {'class': 'form-control input-buttom', 'placeholder': 'Email' } })}}
+                             <span class="text-danger" id="data.email"></span>  
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+                
+                <!-- /row -->
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                     <label for="username">Password :*</label>
+                        {{ form_widget(formfournisseur.plainPassword.first, { 'id':'password-register-fournisseur','attr': {'class': 'form-control input-buttom', 'placeholder': 'Password' } }) }}
+    
+                             <span class="text-danger" id="data.plainPassword"></span>
+
+
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                     <label for="username">Confirmer password :*</label>
+                      {{ form_widget(formfournisseur.plainPassword.second, {'id':'confirmation-register-fournisseur' ,'attr': {'class': 'form-control input-buttom', 'placeholder': 'Confirmer password'  } }) }}
+                     <span class="text-danger" id="children[plainPassword]"></span>
+
+
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- /row -->
+                
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block" id="btn_register_fournisseur_ajax" ><span><i id="spins_fournisseur"</i></span> Enregistrer</button>
+                  </div>
+
+
+              {{ form_end(formfournisseur) }}
+              <footer role="signup" class="text-center">
+                <ul>
+                  <li>
+                     <a href="{{path('fos_user_security_login')}}" style="color:#449d44;">Login</a> <a href="{{path('frontpage')}}" style="color:#449d44;margin-left:8px;">Acceuille</a>
+                  </li>
+                 
+                </ul>
+              </footer>
+
+            </article>
+          </div>
+
+         
+        </div>
+     
+
+     <script>
+       
+     
+                  
+                 
+
+
+
+
+  $('#btn_register_fournisseur_ajax').click(function(e){
+                  e.preventDefault();
+                 
+                  $('#btn_register_fournisseur_ajax').prop('disabled',true);
+                  $("#spins_fournisseur").addClass('fa fa-spinner fa-spin fa-register');
+
+
+                     var responsable=$('#responsable-register-fournisseur').val();
+                  var fonction=$('#fonction-register-fournisseur').val();
+                  var ville=$('#ville-register-fournisseur').val();
+                    var adresse=$('#adresse-register-fournisseur').val();
+                  var cp=$('#cp-register-fournisseur').val();
+                  var email=$('#email-register-fournisseur').val();
+                  var username=$('#username-register-fournisseur').val();
+                  
+                  var telephone=$('#telephone-register-fournisseur').val();
+                  var password=$('#password-register-fournisseur').val();
+                  var confirmpassword=$('#confirmation-register-fournisseur').val();
+               
+                  
+
+                    var errorsArray=['data.email','data.username','data.plainPassword','data.responsable','children[plainPassword]','data.fonction','data.ville','data.adresse','data.cp','data.telephone'];
+
+                    var formRegisterFournisseur = document.getElementById("register_fournisseur_ajax");
+
+                    
+                      if(email=="")
+                  {
+                       document.getElementById('data.email').textContent='Vous devez emplir le champ email ';
+                     $("#spins_fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_register_fournisseur_ajax').prop('disabled',false); 
+                  }
+                 
+                
+
+
+                      if(username=="")
+                  {
+                       document.getElementById('data.username').textContent='Vous devez emplir le champ username ';
+                     $("#spins_fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_register_fournisseur_ajax').prop('disabled',false); 
+                  }
+
+                       if(responsable=="")
+                  {
+                       document.getElementById('data.responsable').textContent='Vous devez emplir le champ responsable ';
+                     $("#spins_fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_register_fournisseur_ajax').prop('disabled',false); 
+                  }
+
+
+                     if(fonction=="")
+                  {
+                       document.getElementById('data.fonction').textContent='Vous devez emplir le champ fonction ';
+                     $("#spins_fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_register_fournisseur_ajax').prop('disabled',false); 
+                  }
+
+
+                      if(ville=="")
+                  {
+                       document.getElementById('data.ville').textContent='Vous devez emplir le champ ville ';
+                     $("#spins_fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_register_fournisseur_ajax').prop('disabled',false); 
+                  }
+
+                      if(adresse=="")
+                  {
+                       document.getElementById('data.adresse').textContent='Vous devez emplir le champ adresse ';
+                     $("#spins_fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_register_fournisseur_ajax').prop('disabled',false); 
+                  }
+
+                       if(cp=="")
+                  {
+                       document.getElementById('data.cp').textContent='Vous devez emplir le champ cp ';
+                     $("#spins_fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_register_fournisseur_ajax').prop('disabled',false); 
+                  }
+
+                       if(telephone=="")
+                  {
+                       document.getElementById('data.telephone').textContent='Vous devez emplir le champ telphone ';
+                     $("#spins_fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_register_fournisseur_ajax').prop('disabled',false); 
+                  }
+
+
+                         if(password=="")
+                  {
+                       document.getElementById('data.plainPassword').textContent='Vous devez emplir le champ password ';
+                     $("#spins_fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_register_fournisseur_ajax').prop('disabled',false); 
+                  }
+
+                          if(confirmpassword=="")
+                  {
+                       document.getElementById('children[plainPassword]').textContent='Vous devez emplir le champ confirmation password ';
+                     $("#spins_fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_register_fournisseur_ajax').prop('disabled',false); 
+                  }
+
+
+
+
+                    
+
+                                 $('#responsable-register-fournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.responsable').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.responsable').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#fonction-register-fournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.fonction').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.fonction').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#ville-register-fournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.ville').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.ville').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#adresse-register-fournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.adresse').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.adresse').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#cp-register-fournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.cp').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.cp').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+
+                                
+
+                                 $('#telephone-register-fournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.telephone').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.telephone').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#email-register-fournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.email').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.email').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#username-register-fournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.username').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.username').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#password-register-fournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('data.plainPassword').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.plainPassword').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#confirmation-register-fournisseur').change(function(){
+                  
+                 if($.trim(document.getElementById('children[plainPassword]').textContent) !== "")
+
+                                  {
+                                    document.getElementById('children[plainPassword]').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+                    
+                     if( email!=="" &&username!=="" && password!== "" && confirmpassword !=="" && responsable !==""&& fonction !==""&&ville!==""&&adresse!=="" && telephone!=="" &&  cp !="" )
+                       {
+
+
+
+
+                             $.ajax({
+                       dataType:"json",
+                       url:$("#register_fournisseur_ajax").attr('action'),
+                       type:$("#register_fournisseur_ajax").attr('method'),
+                        data:new FormData(formRegisterFournisseur),
+                       contentType:false,
+                       processData:false,
+                       cache:false,
+                       success:function (data,status,object)
+                       {
+
+                        $("#spins_fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_register_fournisseur_ajax').prop('disabled',false); 
+
+
+                       var message=data.message;
+                       if(data.success==true)
+                          {
+
+                             
+
+                          errorsArray.forEach(function(error){
+                                  if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+                               });
+                             
+                            
+
+                             $('#register_fournisseur_ajax')[0].reset();
+                            
+
+                            toastr.success(message,'Success', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+
+
+                          }else{
+
+
+                           toastr.error(message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                                       $("#spins_fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_register_fournisseur_ajax').prop('disabled',false);
+
+
+                              if(data.errors){
+
+                                 $("#spins_fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_register_fournisseur_ajax').prop('disabled',false);
+                             
+                             errorsArray.forEach(function(error){
+                                  if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+                               });
+
+
+
+
+
+                             data.errors.forEach(function(error)
+                              {
+
+                               document.getElementById(error.elementId).textContent=error.errorMessage;
+                              });
+
+
+
+
+
+                              }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          }
+
+
+
+
+                           
+                          },
+                          
+                            error:function (data,status,object)
+                          {
+                             
+
+                           toastr.error(data.message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+
+
+
+                         $("#spins_fournisseur").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn_register_fournisseur_ajax').prop('disabled',false);  
+                          }
+
+
+
+
+
+
+                          });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          });
+
+
+
+
+
+
+
+
+
+
+
+
+
+     </script>

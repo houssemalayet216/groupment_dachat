@@ -1,0 +1,117 @@
+<?php
+        // src/AppBundle/Entity/User.php
+
+        namespace AppBundle\Entity;
+
+        use FOS\UserBundle\Model\User as BaseUser;
+        use Doctrine\ORM\Mapping as ORM;
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        /**
+         * @ORM\Entity
+         * @ORM\Table(name="user")
+         */
+        class User extends BaseUser
+        {
+            /**
+             * @ORM\Id
+             * @ORM\Column(type="integer")
+             * @ORM\GeneratedValue(strategy="AUTO")
+             */
+            protected $id;
+
+             /**
+     * @var string
+     *
+     * @ORM\Column(name="civilite", type="string", length=255,nullable=true)
+     */
+    protected $civilite;
+
+
+      /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255,nullable=true)
+     */
+    protected $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=255,nullable=true)
+     */
+    protected $prenom;
+
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="ville", type="string", length=255,nullable=true)
+     */
+    protected $ville;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255,nullable=true)
+     */
+    protected $adresse;
+
+    
+
+      /**
+     * @var string
+     *
+     * @ORM\Column(name="fonction", type="string", length=255,nullable=true)
+     */
+    protected $fonction;
+
+
+      /**
+     * @var string
+     *
+     * @ORM\Column(name="responsable", type="string", length=255,nullable=true)
+     */
+    protected $responsable;
+
+
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="cp", type="integer", length=4,nullable=true)
+     */
+    protected $cp;
+
+
+
+
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="telephone", type="integer", length=8,nullable=true)
+     */
+    protected $telephone;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="logo", type="text",nullable=true)
+     * @Assert\Image()
+     */
+    protected $logo;
+
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="photo", type="text",nullable=true)
+     * @Assert\Image()
+     */
+    protected $photo;
+
+            public function __construct()
+            {
+                parent::__construct();
+                // your own logic
+            }
+        }

@@ -1,0 +1,176 @@
+ {% extends '@Front/default/template.html.twig' %}
+ {%block stylesheet%}
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="{{asset('frontFolder/cart.css')}}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+ {% endblock %}
+
+  {%block slider%}
+  {%endblock%}
+
+   {% block pageContainer %}
+
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div class="banner_content d-md-flex justify-content-between align-items-center" style="display: flex;
+    justify-content: space-between;">
+            <div class="mb-3 mb-md-0">
+              <h2>Cart</h2>
+              <p>Trouver tous les produits ajouter à la cart</p>
+            </div>
+            <div class="page_link">
+              <a href="{{path('frontpage')}}">Home</a>
+              <a href="#">Cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+
+
+
+
+    <section class="cart_area" style="margin-top:30px;">
+      <div class="container">
+
+       
+         {% for flashMessage in app.session.flashbag.get('ValidCommande') %}
+    <div class="alert alert-success alert-dismissible" role="alert" style="margin-top:20px;margin-buttom:20px;">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Succèss</strong> {{flashMessage}}.
+</div>
+        {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="cart_inner">
+          <div class="table-responsive">
+           {%if produits|length > 0 %}
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Produit</th>
+                  <th scope="col">Prix</th>
+                  <th scope="col">Tiket(Kg)</th>
+                  <th scope="col">Nbr Tiket</th>
+                  <th scope="col">Totale</th>
+                  <th scope="col" style="padding-left:10px;text-center;"></th>
+
+                </tr>
+              </thead>
+              <tbody>
+               
+                {%for prod in produits %}
+
+
+
+                <tr>
+                  <td>
+                    <div class="media">
+                      <div class="d-flex">
+                        <img src="{{asset('frontFolder/img/cart-1.jpg')}}" alt="">
+                      </div>
+                      <div class="media-body">
+                        <p>{{prod.titre }}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <h5 id="prix_unitaire" data-prix="{{prod.prix}}">{{prod.prix}}</h5>
+                  </td>
+                  
+                  <td>
+                    <h5 id="tiket" data-tiket="{{prod.tiket}}">{{prod.tiket}}</h5>
+                  </td>
+
+                  <td>
+                    <div class="product_count">
+                      <input type="text" name="qty" id="sst" maxlength="12" data-maxlength="{{prod.disponible}}" value="1" title="Quantity:" class="input-text qty">
+                      <button onclick=" var result = document.getElementById('sst'); var prix=$('#prix_unitaire').data('prix') ;var max=$('#sst').data('maxlength');var tiket=$('#tiket').data('tiket'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst < max ) result.value++ ;var total=(result.value*tiket)*prix;$('#total_prix').html(total);return false;
+                      $.ajax({
+                        url:'/savetiket',
+                        method:'POST',
+                        data:{'total':total,'nbrTiket':sst,'prix':prix},
+                         success:function(data)
+                         {
+
+                         }
+                      });" 
+
+                      class="increase items-count padding-button" type="button" style="padding-button">
+                        <i class="lnr lnr-chevron-up"></i>
+                      </button>
+                      <button onclick="var result = document.getElementById('sst'); var prix=$('#prix_unitaire').data('prix') ;console.log(prix);var tiket=$('#tiket').data('tiket'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--; var total=(result.value*tiket)*prix;$('#total_prix').html(total);return false;
+                        
+                          $.ajax({
+                        url:'/savetiket',
+                        method:'POST',
+                        data:{'total':total,'nbrTiket':sst,'prix':prix},
+                         success:function(data)
+                         {}
+                      });" 
+
+
+
+                         
+                      " class="reduced items-count padding-button" type="button" >
+                        <i class="lnr lnr-chevron-down"></i>
+                      </button>
+                    </div>
+                  </td>
+                  <td>
+                    <h5 id="total_prix"></h5>
+                  </td>
+                  <td>
+                    <div><a class="btn btn-success btn-sm" href="{{path('valider_commander',{'id':prod.id})}}" >Commander</a>
+                    <a class="btn btn-danger btn-sm">Supprimer</a>
+                    </div>
+                  </td>
+                </tr>
+               {%endfor%}
+
+               
+                
+               
+             
+              </tbody>
+            </table>
+
+             {%else%}
+                  <div style="margin-top:50px;margin-bottom:100px;">
+                <div style="text-align:center;"><h3>Aucune résultat trouvé </h3></div>
+                </div>
+                {%endif%}
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+      {% endblock %}
+
+
+
+      {%block javascript %}
+
+      {% endblock %}
